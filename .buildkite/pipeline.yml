@@ -4,3 +4,19 @@ steps:
     artifact_paths: "artifacts/*"
     agents:
       queue: "${BUILDKITE_AGENT_META_DATA_QUEUE:-default}"
+
+# Add a wait step to only deploy after all steps complete
+  - wait
+
+# More steps to follow
+- label: '🚀 Deploy'
+    # TODO: replace with your deploy pipeline's name
+    trigger: kubernetes-tutorial-deploy
+    # Only trigger on master build
+    build:
+      message: "${BUILDKITE_MESSAGE}"
+      commit: "${BUILDKITE_COMMIT}"
+      branch: "${BUILDKITE_BRANCH}"
+      env:
+        DOCKER_IMAGE: "nginx:1.7.9"
+    branches: master
