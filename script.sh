@@ -23,6 +23,10 @@ If you have any questions or need help email support@buildkite.com, we'd be happ
 "
 
 
+echo "+++ :waiting"
+sleep 60
+
+
 echo "+++ :frame_with_picture: Inline image uploaded as a build artifact"
 
 function inline_image {
